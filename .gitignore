@@ -11,8 +11,6 @@ local.properties
 
 *.log
 
-gradle/wrapper/
-
 gradlew
 
 *.bat
