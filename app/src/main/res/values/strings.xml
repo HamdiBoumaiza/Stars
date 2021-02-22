@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Stars</string>
+
+    <!--Common-->
+    <string name="error_network">Please check your Internet Connection.</string>
+    <string name="error_unexpected_message">Something went wrong, please try again.</string>
+
+    <!--  Search screen -->
+    <string name="search_characters">Search characters</string>
+    <string name="hey_there">Hey There</string>
+    <string name="description">Let\'s find out more about Star wars characters</string>
+    <string name="no_results">No Results</string>
+    <string name="no_results_description">Try typing a name of a star wars characters</string>
+
+    <!--  Details screen -->
+    <string name="population_value">%s\'s planet population is %s</string>
+    <string name="movies_this_character_appeared_in">Movies this character appeared in</string>
+    <string name="name">Name</string>
+    <string name="height">Height</string>
+    <string name="birth_year">Birth Year</string>
+    <string name="language">Language</string>
+    <string name="species_of_this_character">Species of this character</string>
+    <string name="height_in_cm_and_feet">%s / %s</string>
+
+</resources>

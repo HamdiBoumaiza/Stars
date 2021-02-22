@@ -1,0 +1,103 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.hb.stars"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    def coreKtx = "1.3.2"
+    def appCompact = "1.2.0"
+    def material = "1.2.1"
+    def constraintLayout = "2.0.4"
+    def retrofit = "2.9.0"
+    def okhttp = "4.9.0"
+    def gson = "2.8.6"
+    def dagger = "2.30.1"
+    def viewmodel = "2.2.0"
+    def coroutine = "1.4.2"
+    def stetho = "1.5.1"
+    def testCoreRunner = "1.2.0"
+    def espresso = "3.3.0"
+    def googleTruth = "1.0"
+    def barista = "3.7.0"
+    def androidxJunit = "1.1.2"
+    def junit = "4.13.1"
+    def androidxArchTest = "2.1.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$coreKtx"
+    implementation "androidx.appcompat:appcompat:$appCompact"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel"
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    //Okhttp3
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+
+    //Gson
+    implementation "com.google.code.gson:gson:$gson"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
+
+    //Stetho
+    implementation "com.facebook.stetho:stetho:$stetho"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
+
+    //TEST SUITE
+    androidTestImplementation "androidx.test:runner:$testCoreRunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunit"
+    androidTestImplementation("com.schibsted.spain:barista:$barista") {
+        exclude group: "org.jetbrains.kotlin"
+    }
+
+    testImplementation "androidx.arch.core:core-testing:$androidxArchTest"
+    testImplementation "junit:junit:$junit"
+    testImplementation "com.google.truth:truth:$googleTruth"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine"
+}
