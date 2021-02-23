@@ -2,12 +2,16 @@ package com.hb.stars.utils
 
 import android.content.Context
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
@@ -65,3 +69,15 @@ fun String.hasValue() = this != UNDEFINED
  */
 inline fun <reified T> Gson.fromJsonToObjectType(json: String): T =
     fromJson(json, object : TypeToken<T>() {}.type)
+
+
+/**
+ * Listen to change on the edit text and return the value in a state flow
+ */
+fun EditText.getTextChangeStateFlow(): StateFlow<String> {
+    val query = MutableStateFlow("")
+    addTextChangedListener {
+        query.value = it.toString()
+    }
+    return query
+}
