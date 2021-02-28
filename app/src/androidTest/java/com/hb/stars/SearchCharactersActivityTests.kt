@@ -15,12 +15,11 @@ import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertN
 import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
 import com.schibsted.spain.barista.interaction.BaristaEditTextInteractions.writeTo
 import com.schibsted.spain.barista.interaction.BaristaListInteractions
+import java.lang.Thread.sleep
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.lang.Thread.sleep
-
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class SearchCharactersActivityTests {
@@ -45,11 +44,10 @@ class SearchCharactersActivityTests {
 
     @Test
     fun testListListenerAndRecyclerView() {
-        //onView(withId(R.id.et_search)).perform(clearText(), typeText("lu"))
-        writeTo(R.id.et_search, "lu");
+        // onView(withId(R.id.et_search)).perform(clearText(), typeText("lu"))
+        writeTo(R.id.et_search, "lu")
         sleep(4000)
-        assertDisplayedAtPosition(R.id.rv_characters, 0, R.id.item_title, "Luke Skywalker");
+        assertDisplayedAtPosition(R.id.rv_characters, 0, R.id.item_title, "Luke Skywalker")
         BaristaListInteractions.clickListItem(R.id.rv_characters, 0)
     }
-
 }

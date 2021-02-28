@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
 }
+apply from: "$project.rootDir/spotless.gradle"
 
 android {
     compileSdkVersion 30

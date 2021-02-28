@@ -7,7 +7,7 @@ import com.hb.stars.data.response.CharacterResponse
 import com.hb.stars.data.response.MovieResponse
 import com.hb.stars.data.response.PlanetResponse
 import com.hb.stars.data.response.SpecieResponse
-import kotlinx.coroutines.*
+import com.hb.stars.utils.convertUrlToHttps
 
 class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWarsDataSource {
     override suspend fun searchCharacters(input: String): StarWarsResult<List<CharacterResponse>?> {
@@ -36,39 +36,41 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWa
         }
     }
 
-    override suspend fun getSpecies(specieUrl: String): StarWarsResult<SpecieResponse?> {
+    override suspend fun getSpecies(specieUrls: List<String>): StarWarsResult<List<SpecieResponse?>> {
         return try {
-            val e = withContext(Dispatchers.IO) {
-                starWarsApi.getSpecies(specieUrl)
+            val movies = ArrayList<SpecieResponse?>()
+            specieUrls.forEach {
+                val result = starWarsApi.getSpecie(it)
+                if (result.isSuccessful) {
+                    movies.add(result.body()!!)
+                }
             }
-
-            val result = starWarsApi.getSpecies(specieUrl)
-            if (result.isSuccessful) {
-                StarWarsResult.Success(result.body())
+            if (movies.isNotEmpty()) {
+                StarWarsResult.Success(movies)
             } else {
-                StarWarsResult.Error(DataSourceException.Server(result.errorBody()))
+                StarWarsResult.Error(DataSourceException.Server(""))
             }
         } catch (e: Exception) {
             StarWarsResult.Error(RequestErrorHandler.getRequestError(e))
         }
     }
 
-    override suspend fun getMovie(movieUrl: String): StarWarsResult<MovieResponse?> {
+    override suspend fun getMovies(movieUrls: List<String>): StarWarsResult<ArrayList<MovieResponse?>> {
         return try {
-            val result = starWarsApi.getMovie(movieUrl)
-            if (result.isSuccessful) {
-                StarWarsResult.Success(result.body())
+            val movies = ArrayList<MovieResponse?>()
+            movieUrls.forEach {
+                val result = starWarsApi.getMovie(it)
+                if (result.isSuccessful) {
+                    movies.add(result.body()!!)
+                }
+            }
+            if (movies.isNotEmpty()) {
+                StarWarsResult.Success(movies)
             } else {
-                StarWarsResult.Error(DataSourceException.Server(result.errorBody()))
+                StarWarsResult.Error(DataSourceException.Server(""))
             }
         } catch (e: Exception) {
             StarWarsResult.Error(RequestErrorHandler.getRequestError(e))
         }
-    }
-}
-
-fun <T, V> CoroutineScope.asyncAll(list: List<T>, block: suspend (T) -> V): List<Deferred<V>> {
-    return list.map {
-        async { block.invoke(it) }
     }
 }

@@ -7,9 +7,9 @@ import com.hb.stars.databinding.ItemSpecieBinding
 import com.hb.stars.domain.models.SpecieModel
 
 
-class SpeciesAdapter : RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
+class SpeciesAdapter(private val list: List<SpecieModel>) :
+    RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
 
-    private val list = ArrayList<SpecieModel>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemSpecieBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -22,10 +22,6 @@ class SpeciesAdapter : RecyclerView.Adapter<SpeciesAdapter.ViewHolder>() {
         holder.bindTo(list[position])
     }
 
-    fun addItems(specieModel: SpecieModel) {
-        list.add(specieModel)
-        notifyDataSetChanged()
-    }
 
     override fun getItemCount() = list.size
 

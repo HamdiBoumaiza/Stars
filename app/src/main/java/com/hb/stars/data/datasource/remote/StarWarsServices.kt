@@ -19,8 +19,8 @@ interface StarWarsServices {
     suspend fun getPlanet(@Url planetUrl: String): Response<PlanetResponse>
 
     @GET
-    fun getSpecies(@Url specieUrl: String): Response<SpecieResponse>
+    suspend fun getSpecie(@Url specieUrl: String): Response<SpecieResponse>
 
     @GET
-    fun getMovie(@Url movieUrl: String): Response<MovieResponse>
+    suspend fun getMovie(@Url movieUrl: String): Response<MovieResponse>
 }

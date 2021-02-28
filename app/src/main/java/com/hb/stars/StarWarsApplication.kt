@@ -5,7 +5,6 @@ import com.facebook.stetho.Stetho
 import com.hb.stars.di.component.AppComponent
 import com.hb.stars.di.component.DaggerAppComponent
 
-
 open class StarWarsApplication : Application() {
 
     companion object {

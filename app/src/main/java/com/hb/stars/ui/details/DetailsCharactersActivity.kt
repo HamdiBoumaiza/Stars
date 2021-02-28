@@ -23,8 +23,6 @@ class DetailsCharactersActivity : AppCompatActivity() {
     private val viewModel by lazy { viewModelProvider(viewModelFactory) as DetailsCharactersViewModel }
 
     private lateinit var binding: ActivityDetailsCharactersBinding
-    private val moviesAdapter by lazy { MoviesAdapter() }
-    private val speciesAdapter by lazy { SpeciesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,36 +45,25 @@ class DetailsCharactersActivity : AppCompatActivity() {
                     tvDetailsHeightValue.text = UNDEFINED
                 }
             }
-            getPlanet(homeWorld)
+            getPlanet(getPlanetUrl())
             getMovies(this)
             getSpecies(this)
         }
     }
 
-    private fun getPlanet(homeWorld: String) {
-        if (homeWorld.hasValue()) viewModel.getPlanet(homeWorld.convertUrlToHttps())
+    private fun getPlanet(planet: String) {
+        if (planet.hasValue()) viewModel.getPlanet(planet)
     }
 
     private fun getSpecies(character: CharacterModel) {
         if (character.species.isNotEmpty()) {
-            binding.cardSpecies.show()
-            binding.rvSpecies.layoutManager =
-                LinearLayoutManager(this@DetailsCharactersActivity)
-            binding.rvSpecies.adapter = speciesAdapter
-            character.species.forEach {
-                viewModel.getSpecie(it.convertUrlToHttps())
-            }
+            viewModel.getSpecies(character.getSpeciesUrl())
         }
     }
 
     private fun getMovies(character: CharacterModel) {
         if (character.films.isNotEmpty()) {
-            binding.cardMovies.show()
-            binding.rvMovies.layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
-            binding.rvMovies.adapter = moviesAdapter
-            character.films.forEach {
-                viewModel.getMovie(it.convertUrlToHttps())
-            }
+            viewModel.getMovies(character.getMoviesUrl())
         }
     }
 
@@ -86,9 +73,14 @@ class DetailsCharactersActivity : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.resultMovie.observe(this) {
-            it.onSuccess { movie ->
-                moviesAdapter.addItems(movie)
+            it.onSuccess { movies ->
                 binding.progressCircular.hide()
+                binding.cardMovies.show()
+                with(binding.rvMovies) {
+                    layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
+                    adapter = MoviesAdapter(movies)
+                }
+
             }.onError { error ->
                 showError(error)
                 binding.progressCircular.show()
@@ -116,9 +108,14 @@ class DetailsCharactersActivity : AppCompatActivity() {
         }
 
         viewModel.resultSpecie.observe(this) {
-            it.onSuccess { specie ->
-                speciesAdapter.addItems(specie)
+            it.onSuccess { species ->
                 binding.progressCircular.hide()
+                binding.cardSpecies.show()
+                with(binding.rvSpecies) {
+                    layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
+                    adapter = SpeciesAdapter(species)
+                }
+
             }.onError { error ->
                 showError(error)
                 binding.progressCircular.show()

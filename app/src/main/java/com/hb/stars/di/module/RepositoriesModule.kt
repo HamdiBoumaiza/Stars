@@ -11,14 +11,12 @@ import javax.inject.Singleton
 @Module
 class RepositoriesModule {
 
-
     @Provides
     @Singleton
     fun provideAppRepository(
-        api: StarWarsServices,
+        api: StarWarsServices
     ): StarWarsRepository {
         val starWarsDataSourceImpl = StarWarsDataSourceImpl(api)
         return StarWarsRepositoryImpl(starWarsDataSourceImpl)
     }
-
 }

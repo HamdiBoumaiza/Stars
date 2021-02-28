@@ -1,7 +1,5 @@
 package com.hb.stars.data.commun
 
-import okhttp3.ResponseBody
-
 sealed class DataSourceException(
     val messageResource: Any?
 ) : RuntimeException() {

@@ -5,9 +5,9 @@ import com.google.common.truth.Truth.assertThat
 import com.hb.stars.data.commun.onError
 import com.hb.stars.data.commun.onSuccess
 import com.hb.stars.datasource.StarWarsDataSourceImplTest
-import com.hb.stars.domain.usecases.GetMovieUseCase
+import com.hb.stars.domain.usecases.GetMoviesUseCase
 import com.hb.stars.domain.usecases.GetPlanetUseCase
-import com.hb.stars.domain.usecases.GetSpecieUseCase
+import com.hb.stars.domain.usecases.GetSpeciesUseCase
 import com.hb.stars.helpers.MainCoroutineRule
 import com.hb.stars.ui.details.DetailsCharactersViewModel
 import com.hb.stars.repository.StarWarsRepositoryImplTest
@@ -34,9 +34,9 @@ class DetailsCharactersViewModelTest {
     fun setup() {
         val repo = StarWarsRepositoryImplTest(StarWarsDataSourceImplTest())
         viewModel = DetailsCharactersViewModel(
-            GetMovieUseCase(repo),
+            GetMoviesUseCase(repo),
             GetPlanetUseCase(repo),
-            GetSpecieUseCase(repo)
+            GetSpeciesUseCase(repo)
         )
     }
 

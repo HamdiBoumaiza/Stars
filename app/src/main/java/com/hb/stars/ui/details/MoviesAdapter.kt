@@ -8,9 +8,7 @@ import com.hb.stars.domain.models.MovieModel
 import com.hb.stars.utils.DEFAULT_MAX_LINES_MOVIE
 
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
-
-    private val list = ArrayList<MovieModel>()
+class MoviesAdapter(private val list: List<MovieModel>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemMovieBinding.inflate(
@@ -22,11 +20,6 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindTo(list[position])
-    }
-
-    fun addItems(movieModel: MovieModel) {
-        list.add(movieModel)
-        notifyDataSetChanged()
     }
 
     override fun getItemCount() = list.size

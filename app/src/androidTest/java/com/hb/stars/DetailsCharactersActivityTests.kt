@@ -13,7 +13,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4ClassRunner::class)
 class DetailsCharactersActivityTests {
 
@@ -32,6 +31,4 @@ class DetailsCharactersActivityTests {
         onView(withId(R.id.card_movies)).check(matches(not(isDisplayed())))
         onView(withId(R.id.card_species)).check(matches(not(isDisplayed())))
     }
-
-
 }

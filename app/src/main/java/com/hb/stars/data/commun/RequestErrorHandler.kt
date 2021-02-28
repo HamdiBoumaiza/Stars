@@ -1,10 +1,9 @@
 package com.hb.stars.data.commun
 
 import com.hb.stars.R
-import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
-
+import retrofit2.HttpException
 
 object RequestErrorHandler {
 
@@ -21,7 +20,7 @@ object RequestErrorHandler {
                 DataSourceException.Connection(R.string.error_network)
             }
             is SocketTimeoutException -> {
-                //TODO update message
+                // TODO update message
                 DataSourceException.Timeout(R.string.error_unexpected_message)
             }
             else -> {
@@ -33,11 +32,11 @@ object RequestErrorHandler {
     private fun handleHttpException(httpException: HttpException): DataSourceException {
         return when (httpException.code()) {
             in HTTP_CODE_CLIENT_START..HTTP_CODE_CLIENT_END -> {
-                //TODO update message
+                // TODO update message
                 DataSourceException.Client(R.string.error_unexpected_message)
             }
             in HTTP_CODE_SERVER_START..HTTP_CODE_SERVER_END -> {
-                //TODO update message
+                // TODO update message
                 DataSourceException.Server(R.string.error_unexpected_message)
             }
             else -> {
@@ -45,5 +44,4 @@ object RequestErrorHandler {
             }
         }
     }
-
 }

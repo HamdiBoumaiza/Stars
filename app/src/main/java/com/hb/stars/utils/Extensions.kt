@@ -37,7 +37,11 @@ fun View.hide() {
 /**
  * extension function that takes a url string as http and return it with https instead
  */
-fun String.convertUrlToHttps() = substring(0, 4) + 's' + substring(4)
+fun String.convertUrlToHttps() = if (this.isNotEmpty()) {
+    substring(0, 4) + 's' + substring(4)
+} else {
+    UNDEFINED
+}
 
 /**
  * extension function for the Toast class that takes a string

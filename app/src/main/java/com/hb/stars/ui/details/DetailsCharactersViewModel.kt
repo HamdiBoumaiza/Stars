@@ -8,36 +8,36 @@ import com.hb.stars.data.commun.StarWarsResult
 import com.hb.stars.domain.models.MovieModel
 import com.hb.stars.domain.models.PlanetModel
 import com.hb.stars.domain.models.SpecieModel
-import com.hb.stars.domain.usecases.GetMovieUseCase
+import com.hb.stars.domain.usecases.GetMoviesUseCase
 import com.hb.stars.domain.usecases.GetPlanetUseCase
-import com.hb.stars.domain.usecases.GetSpecieUseCase
+import com.hb.stars.domain.usecases.GetSpeciesUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailsCharactersViewModel @Inject constructor(
-    private val getMovieUseCase: GetMovieUseCase,
+    private val getMovieUseCase: GetMoviesUseCase,
     private val getPlanetUseCase: GetPlanetUseCase,
-    private val getSpecieUseCase: GetSpecieUseCase
+    private val getSpecieUseCase: GetSpeciesUseCase
 ) : ViewModel() {
 
-    private var _resultMovie = MutableLiveData<StarWarsResult<MovieModel>>()
-    var resultMovie: LiveData<StarWarsResult<MovieModel>> = _resultMovie
+    private var _resultMovie = MutableLiveData<StarWarsResult<List<MovieModel>>>()
+    var resultMovie: LiveData<StarWarsResult<List<MovieModel>>> = _resultMovie
 
-    fun getMovie(movieUrl: String) {
+    fun getMovies(movieUrls: List<String>) {
         viewModelScope.launch {
-            getMovieUseCase(movieUrl).collect {
+            getMovieUseCase(movieUrls).collect {
                 _resultMovie.postValue(it)
             }
         }
     }
 
-    private var _resultSpecie = MutableLiveData<StarWarsResult<SpecieModel>>()
-    var resultSpecie: LiveData<StarWarsResult<SpecieModel>> = _resultSpecie
+    private var _resultSpecie = MutableLiveData<StarWarsResult<List<SpecieModel>>>()
+    var resultSpecie: LiveData<StarWarsResult<List<SpecieModel>>> = _resultSpecie
 
-    fun getSpecie(movieUrl: String) {
+    fun getSpecies(movieUrls: List<String>) {
         viewModelScope.launch {
-            getSpecieUseCase(movieUrl).collect {
+            getSpecieUseCase(movieUrls).collect {
                 _resultSpecie.postValue(it)
             }
         }

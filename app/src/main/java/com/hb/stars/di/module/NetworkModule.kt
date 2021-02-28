@@ -6,11 +6,11 @@ import com.hb.stars.data.commun.BASE_URL
 import com.hb.stars.data.datasource.remote.StarWarsServices
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -46,7 +46,6 @@ class NetworkModule {
     @Provides
     @Singleton
     fun providesConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
-
 
     @Provides
     @Singleton
