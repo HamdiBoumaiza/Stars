@@ -30,3 +30,5 @@ spotless {
         endWithNewline()
     }
 }
+
+//Before committing your code, run ./gradlew app:spotlessApply to automatically format your code.

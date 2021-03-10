@@ -89,6 +89,8 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$stetho"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
 
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.4"
+
     //TEST SUITE
     androidTestImplementation "androidx.test:runner:$testCoreRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
