@@ -1,7 +1,7 @@
 package com.hb.stars.data.commun
 
 sealed class DataSourceException(
-    val messageResource: Any?
+        val messageResource: Any?
 ) : RuntimeException() {
 
     class Connection(messageResource: Int) : DataSourceException(messageResource)

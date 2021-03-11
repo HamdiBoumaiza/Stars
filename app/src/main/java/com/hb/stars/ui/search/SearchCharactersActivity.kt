@@ -61,23 +61,23 @@ class SearchCharactersActivity : AppCompatActivity() {
     private fun setEditTextListener() {
         lifecycleScope.launch {
             binding.etSearch.getTextChangeStateFlow()
-                .debounce(300)
-                .filter { query ->
-                    if (query.isEmpty()) {
-                        runOnUiThread { setError(null) }
-                        return@filter false
-                    } else {
-                        return@filter true
+                    .debounce(300)
+                    .filter { query ->
+                        if (query.isEmpty()) {
+                            runOnUiThread { setError(null) }
+                            return@filter false
+                        } else {
+                            return@filter true
+                        }
                     }
-                }
-                .distinctUntilChanged()
-                .flatMapLatest { query ->
-                    viewModel.searchCharacters(query)
-                }
-                .flowOn(Dispatchers.Default)
-                .collect { result ->
-                    processResult(result)
-                }
+                    .distinctUntilChanged()
+                    .flatMapLatest { query ->
+                        viewModel.searchCharacters(query)
+                    }
+                    .flowOn(Dispatchers.Default)
+                    .collect { result ->
+                        processResult(result)
+                    }
         }
 
         binding.etSearch.setOnTouchListener { view, event ->

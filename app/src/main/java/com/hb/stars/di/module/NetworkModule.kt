@@ -6,11 +6,11 @@ import com.hb.stars.data.commun.BASE_URL
 import com.hb.stars.data.datasource.remote.StarWarsServices
 import dagger.Module
 import dagger.Provides
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -21,22 +21,22 @@ class NetworkModule {
     @Provides
     @Singleton
     fun providesRetrofit(
-        gsonConverterFactory: GsonConverterFactory,
-        okHttpClient: OkHttpClient
+            gsonConverterFactory: GsonConverterFactory,
+            okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(gsonConverterFactory)
-            .client(okHttpClient)
-            .build()
+                .addConverterFactory(gsonConverterFactory)
+                .client(okHttpClient)
+                .build()
     }
 
     @Provides
     @Singleton
     fun providesOkHttpClient(): OkHttpClient {
         val client = OkHttpClient.Builder()
-            .connectTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(IO_TIMEOUT, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG)
             client.addNetworkInterceptor(StethoInterceptor())
@@ -50,5 +50,5 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): StarWarsServices =
-        retrofit.create(StarWarsServices::class.java)
+            retrofit.create(StarWarsServices::class.java)
 }

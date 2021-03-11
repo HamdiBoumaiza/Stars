@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [ViewModelModule::class, RepositoriesModule::class, NetworkModule::class]
+        modules = [ViewModelModule::class, RepositoriesModule::class, NetworkModule::class]
 )
 interface AppComponent {
     fun inject(searchCharactersActivity: SearchCharactersActivity)

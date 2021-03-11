@@ -16,9 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailsCharactersViewModel @Inject constructor(
-    private val getMovieUseCase: GetMoviesUseCase,
-    private val getPlanetUseCase: GetPlanetUseCase,
-    private val getSpecieUseCase: GetSpeciesUseCase
+        private val getMovieUseCase: GetMoviesUseCase,
+        private val getPlanetUseCase: GetPlanetUseCase,
+        private val getSpecieUseCase: GetSpeciesUseCase
 ) : ViewModel() {
 
     private val _resultMovie = MutableLiveData<StarWarsResult<List<MovieModel>>>()

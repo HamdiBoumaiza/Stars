@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.onStart
  * extension function for Flow Class to emit loading state before the flow starts
  */
 fun <T> Flow<StarWarsResult<T>>.onFlowStarts() =
-    onStart {
-        emit(StarWarsResult.Loading)
-    }.catch {
-        emit(StarWarsResult.Error(DataSourceException.Unexpected(R.string.error_unexpected_message)))
-    }
+        onStart {
+            emit(StarWarsResult.Loading)
+        }.catch {
+            emit(StarWarsResult.Error(DataSourceException.Unexpected(R.string.error_unexpected_message)))
+        }

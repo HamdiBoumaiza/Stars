@@ -1,9 +1,9 @@
 package com.hb.stars.data.commun
 
 import com.hb.stars.R
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
-import retrofit2.HttpException
 
 object RequestErrorHandler {
 
@@ -14,7 +14,8 @@ object RequestErrorHandler {
 
     fun getRequestError(throwable: Throwable): DataSourceException {
         return when (throwable) {
-            is HttpException -> { handleHttpException(throwable)
+            is HttpException -> {
+                handleHttpException(throwable)
             }
             is IOException -> {
                 DataSourceException.Connection(R.string.error_network)

@@ -40,7 +40,7 @@ class DetailsCharactersActivity : AppCompatActivity() {
                 tvDetailsBirthYearValue.text = birthYear
                 if (height.hasValue()) {
                     tvDetailsHeightValue.text =
-                        getString(R.string.height_in_cm_and_feet, height, height.convertCmToFeet())
+                            getString(R.string.height_in_cm_and_feet, height, height.convertCmToFeet())
                 } else {
                     tvDetailsHeightValue.text = UNDEFINED
                 }
@@ -68,7 +68,7 @@ class DetailsCharactersActivity : AppCompatActivity() {
     }
 
     private fun getExtraCharacter() =
-        intent?.extras?.getParcelable(CHARACTER_EXTRA) as CharacterModel?
+            intent?.extras?.getParcelable(CHARACTER_EXTRA) as CharacterModel?
 
 
     private fun initObservers() {
@@ -93,11 +93,11 @@ class DetailsCharactersActivity : AppCompatActivity() {
             it.onSuccess { planet ->
                 binding.cardPopulation.show()
                 binding.tvDetailsPopulation.text =
-                    getString(
-                        R.string.population_value,
-                        getExtraCharacter()?.name,
-                        planet.population
-                    )
+                        getString(
+                                R.string.population_value,
+                                getExtraCharacter()?.name,
+                                planet.population
+                        )
                 binding.progressCircular.hide()
             }.onError { error ->
                 showError(error)

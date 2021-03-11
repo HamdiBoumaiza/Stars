@@ -16,7 +16,7 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
-    provider: ViewModelProvider.Factory
+        provider: ViewModelProvider.Factory
 ) = ViewModelProvider(this, provider).get(VM::class.java)
 
 /**
@@ -72,7 +72,7 @@ fun String.hasValue() = this != UNDEFINED
  * inline function to convert json string to a TypeToken generic type
  */
 inline fun <reified T> Gson.fromJsonToObjectType(json: String): T =
-    fromJson(json, object : TypeToken<T>() {}.type)
+        fromJson(json, object : TypeToken<T>() {}.type)
 
 
 /**

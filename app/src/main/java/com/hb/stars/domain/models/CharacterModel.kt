@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CharacterModel(
-    val name: String,
-    val birthYear: String,
-    val height: String,
-    val homeWorld: String,
-    val films: List<String>,
-    val species: List<String>
+        val name: String,
+        val birthYear: String,
+        val height: String,
+        val homeWorld: String,
+        val films: List<String>,
+        val species: List<String>
 ) : Parcelable {
     fun getPlanetUrl() = homeWorld.convertUrlToHttps()
     fun getMoviesUrl() = films.map { it.convertUrlToHttps() }

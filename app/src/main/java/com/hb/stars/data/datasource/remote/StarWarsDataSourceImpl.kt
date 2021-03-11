@@ -45,12 +45,12 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWa
             val species = ArrayList<SpecieResponse?>()
             withContext(Dispatchers.IO) {
                 asyncAll(specieUrls) { starWarsApi.getSpecie(it) }
-                    .awaitAll()
-                    .forEach {
-                        if (it.isSuccessful) {
-                            species.add(it.body())
+                        .awaitAll()
+                        .forEach {
+                            if (it.isSuccessful) {
+                                species.add(it.body())
+                            }
                         }
-                    }
             }
             if (species.isNotEmpty()) {
                 StarWarsResult.Success(species)
@@ -67,12 +67,12 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWa
             val movies = ArrayList<MovieResponse?>()
             withContext(Dispatchers.IO) {
                 asyncAll(movieUrls) { starWarsApi.getMovie(it) }
-                    .awaitAll()
-                    .forEach {
-                        if (it.isSuccessful) {
-                            movies.add(it.body())
+                        .awaitAll()
+                        .forEach {
+                            if (it.isSuccessful) {
+                                movies.add(it.body())
+                            }
                         }
-                    }
             }
             if (movies.isNotEmpty()) {
                 StarWarsResult.Success(movies)
