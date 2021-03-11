@@ -5,10 +5,11 @@ I wrote an [article](https://medium.com/@hamdiboumaiza/navigating-mvvm-with-dagg
 This app is based on the [Guide to app architecture](https://developer.android.com/jetpack/docs/guide) article, [Kotlin 1.4](https://kotlinlang.org/docs/reference/whatsnew13.html), and [coroutine](https://kotlinlang.org/docs/reference/coroutines/basics.html). I also used some android architecture components like [LiveData](https://developer.android.com/jetpack/arch/livedata), [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel).
 
 # Screenshots
-![SearchCharactersActivity](screenshots/Screenshot_1.jpg "search no results")
-![SearchCharactersActivity](screenshots/Screenshot_2.jpg "default search screen ")
-![DetailsCharactersActivity](screenshots/Screenshot_3.jpg "Details character")
-
+<p align="center">
+  <img src="https://github.com/HamdiBoumaiza/Stars/blob/main/screenshots/Screenshot_1.jpg" width="200">
+  <img src="https://github.com/HamdiBoumaiza/Stars/blob/main/screenshots/Screenshot_2.jpg" width="200">
+  <img src="https://github.com/HamdiBoumaiza/Stars/blob/main/screenshots/Screenshot_3.jpg" width="200">
+</p>
 
 # Project Architecture
 ### Communication between layers
