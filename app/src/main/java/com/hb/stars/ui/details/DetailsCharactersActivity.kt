@@ -3,6 +3,7 @@ package com.hb.stars.ui.details
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hb.stars.R
 import com.hb.stars.StarWarsApplication
@@ -13,6 +14,7 @@ import com.hb.stars.data.commun.onSuccess
 import com.hb.stars.databinding.ActivityDetailsCharactersBinding
 import com.hb.stars.domain.models.CharacterModel
 import com.hb.stars.utils.*
+import kotlinx.coroutines.flow.collect
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
@@ -72,55 +74,62 @@ class DetailsCharactersActivity : AppCompatActivity() {
 
 
     private fun initObservers() {
-        viewModel.resultMovie.observe(this) {
-            it.onSuccess { movies ->
-                binding.progressCircular.hide()
-                binding.cardMovies.show()
-                with(binding.rvMovies) {
-                    layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
-                    adapter = MoviesAdapter(movies)
-                }
+        lifecycleScope.launchWhenStarted {
+            viewModel.resultMovie.collect {
+                it.onSuccess { movies ->
+                    binding.progressCircular.hide()
+                    binding.cardMovies.show()
+                    with(binding.rvMovies) {
+                        layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
+                        adapter = MoviesAdapter(movies)
+                    }
 
-            }.onError { error ->
-                showError(error)
-                binding.progressCircular.show()
-            }.onLoading {
-                binding.progressCircular.show()
+                }.onError { error ->
+                    showError(error)
+                    binding.progressCircular.show()
+                }.onLoading {
+                    binding.progressCircular.show()
+                }
             }
         }
 
-        viewModel.resultPlanet.observe(this) {
-            it.onSuccess { planet ->
-                binding.cardPopulation.show()
-                binding.tvDetailsPopulation.text =
-                        getString(
-                                R.string.population_value,
-                                getExtraCharacter()?.name,
-                                planet.population
-                        )
-                binding.progressCircular.hide()
-            }.onError { error ->
-                showError(error)
-                binding.progressCircular.show()
-            }.onLoading {
-                binding.progressCircular.show()
+        lifecycleScope.launchWhenStarted {
+            viewModel.resultPlanet.collect {
+                it.onSuccess { planet ->
+                    binding.cardPopulation.show()
+                    binding.tvDetailsPopulation.text =
+                            getString(
+                                    R.string.population_value,
+                                    getExtraCharacter()?.name,
+                                    planet.population
+                            )
+                    binding.progressCircular.hide()
+                }.onError { error ->
+                    showError(error)
+                    binding.progressCircular.show()
+                }.onLoading {
+                    binding.progressCircular.show()
+                }
             }
         }
 
-        viewModel.resultSpecie.observe(this) {
-            it.onSuccess { species ->
-                binding.progressCircular.hide()
-                binding.cardSpecies.show()
-                with(binding.rvSpecies) {
-                    layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
-                    adapter = SpeciesAdapter(species)
-                }
 
-            }.onError { error ->
-                showError(error)
-                binding.progressCircular.show()
-            }.onLoading {
-                binding.progressCircular.show()
+        lifecycleScope.launchWhenStarted {
+            viewModel.resultSpecie.collect {
+                it.onSuccess { species ->
+                    binding.progressCircular.hide()
+                    binding.cardSpecies.show()
+                    with(binding.rvSpecies) {
+                        layoutManager = LinearLayoutManager(this@DetailsCharactersActivity)
+                        adapter = SpeciesAdapter(species)
+                    }
+
+                }.onError { error ->
+                    showError(error)
+                    binding.progressCircular.show()
+                }.onLoading {
+                    binding.progressCircular.show()
+                }
             }
         }
     }
