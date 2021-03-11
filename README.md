@@ -42,8 +42,8 @@ I made a diagram to show the flow of the data between the three layers(data, dom
 Libraries Used
 ---------------
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
-* [LiveData](https://developer.android.com/jetpack/arch/livedata) - notify the view when data changes .
-* [DataBinding](https://developer.android.com/topic/libraries/data-binding/) - bind UI components to data sources
+* [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) - enable flows to optimally emit state updates and emit values to multiple consumers..
+* [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - bind UI components to data sources
 * [Material](https://material.io/develop/android/docs/getting-started/) - Material Components.
 * [Coroutine](https://github.com/Kotlin/kotlinx.coroutines#user-content-android) - performs background tasks
 * [Flows](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - for asynchronous data streams
@@ -60,4 +60,27 @@ Libraries Used
 # To be added
 * more testing
 * animations
+
+<br />
+
+## License 🔖
+```
+    Apache 2.0 License
+
+
+    Copyright 2021 Hamdi Boumaiza
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+```
 
