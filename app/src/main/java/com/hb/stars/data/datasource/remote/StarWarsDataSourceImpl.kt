@@ -1,13 +1,17 @@
 package com.hb.stars.data.datasource.remote
 
+import com.hb.stars.R
 import com.hb.stars.data.commun.DataSourceException
 import com.hb.stars.data.commun.RequestErrorHandler
 import com.hb.stars.data.commun.StarWarsResult
+import com.hb.stars.data.commun.asyncAll
 import com.hb.stars.data.response.CharacterResponse
 import com.hb.stars.data.response.MovieResponse
 import com.hb.stars.data.response.PlanetResponse
 import com.hb.stars.data.response.SpecieResponse
-import com.hb.stars.utils.convertUrlToHttps
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 
 class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWarsDataSource {
     override suspend fun searchCharacters(input: String): StarWarsResult<List<CharacterResponse>?> {
@@ -38,17 +42,20 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWa
 
     override suspend fun getSpecies(specieUrls: List<String>): StarWarsResult<List<SpecieResponse?>> {
         return try {
-            val movies = ArrayList<SpecieResponse?>()
-            specieUrls.forEach {
-                val result = starWarsApi.getSpecie(it)
-                if (result.isSuccessful) {
-                    movies.add(result.body()!!)
-                }
+            val species = ArrayList<SpecieResponse?>()
+            withContext(Dispatchers.IO) {
+                asyncAll(specieUrls) { starWarsApi.getSpecie(it) }
+                    .awaitAll()
+                    .forEach {
+                        if (it.isSuccessful) {
+                            species.add(it.body())
+                        }
+                    }
             }
-            if (movies.isNotEmpty()) {
-                StarWarsResult.Success(movies)
+            if (species.isNotEmpty()) {
+                StarWarsResult.Success(species)
             } else {
-                StarWarsResult.Error(DataSourceException.Server(""))
+                StarWarsResult.Error(DataSourceException.Server(R.string.error_unexpected_message))
             }
         } catch (e: Exception) {
             StarWarsResult.Error(RequestErrorHandler.getRequestError(e))
@@ -58,16 +65,19 @@ class StarWarsDataSourceImpl(private val starWarsApi: StarWarsServices) : StarWa
     override suspend fun getMovies(movieUrls: List<String>): StarWarsResult<ArrayList<MovieResponse?>> {
         return try {
             val movies = ArrayList<MovieResponse?>()
-            movieUrls.forEach {
-                val result = starWarsApi.getMovie(it)
-                if (result.isSuccessful) {
-                    movies.add(result.body()!!)
-                }
+            withContext(Dispatchers.IO) {
+                asyncAll(movieUrls) { starWarsApi.getMovie(it) }
+                    .awaitAll()
+                    .forEach {
+                        if (it.isSuccessful) {
+                            movies.add(it.body())
+                        }
+                    }
             }
             if (movies.isNotEmpty()) {
                 StarWarsResult.Success(movies)
             } else {
-                StarWarsResult.Error(DataSourceException.Server(""))
+                StarWarsResult.Error(DataSourceException.Server(R.string.error_unexpected_message))
             }
         } catch (e: Exception) {
             StarWarsResult.Error(RequestErrorHandler.getRequestError(e))
