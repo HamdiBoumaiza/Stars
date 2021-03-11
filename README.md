@@ -2,6 +2,8 @@
 Hello there ,
 In this project I tried showcasing how to build an Android Application with clean architecture and MVVM using some of the jetpack libraries with Kotlin Coroutines & Dagger2. This App is using the [Star Wars API](https://swapi.dev/) as a remote data source.
 
+This side Project was initially a case study given to me as a challenge for an android role.
+
 I wrote an [article](https://medium.com/@hamdiboumaiza/navigating-mvvm-with-dagger-2-coroutines-and-aac-57a37ac25f3a) a while back in which i talked about some the choices i take when developing an android application.
 
 This app is based on the [Guide to app architecture](https://developer.android.com/jetpack/docs/guide) article, [Kotlin 1.4](https://kotlinlang.org/docs/reference/whatsnew13.html), and [coroutine](https://kotlinlang.org/docs/reference/coroutines/basics.html). I also used some android architecture components like [LiveData](https://developer.android.com/jetpack/arch/livedata), [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel).
