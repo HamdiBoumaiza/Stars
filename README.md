@@ -43,7 +43,7 @@ Libraries Used
 ---------------
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
 * [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) - enable flows to optimally emit state updates and emit values to multiple consumers..
-* [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - bind UI components to data sources
+* [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - write code that interacts with views more easily
 * [Material](https://material.io/develop/android/docs/getting-started/) - Material Components.
 * [Coroutine](https://github.com/Kotlin/kotlinx.coroutines#user-content-android) - performs background tasks
 * [Flows](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - for asynchronous data streams
